@@ -1,49 +1,57 @@
 #!/usr/bin/python3
-''' flask web application for task 3
-    0x04. AirBnB clone - Web framework
-'''
+""" Starts a flask web application """
 
-from flask import Flask, escape, render_template
+
+from flask import Flask
+from flask import render_template
 
 
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello():
-    '''returns a hello message'''
+def hello_hbtn():
+    """ returns a hello string to holberton """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    '''returns a hello message'''
+def hello_holberton():
+    """ returns holberton """
     return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def ctext(text):
-    '''returns a test message'''
-    return 'C {}'.format(escape(text).replace('_', ' '))
+def hello_c(text):
+    """ returns string text after replacing underscores with spaces """
+    words = "C "
+    words += text.replace('_', ' ')
+    return words
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def pythontext(text='is cool'):
-    '''returns a test message'''
-    return 'Python {}'.format(escape(text).replace('_', ' '))
+def python_flask(text):
+    """ returns text after replacing underscores with spaces,
+        default = 'is cool'
+    """
+    text = text.replace('_', ' ')
+    return 'Python %s' % text
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def numberRoute(n):
-    '''returns a test message'''
-    return '{} is a number'.format(n)
+def number_flask(n):
+    """ display number """
+    if type(n) == int:
+        return '%i is a number' % n
 
 
 @app.route('/number_template/<int:n>', strict_slashes=False)
-def templateRoute(n):
-    '''returns a test template'''
-    return render_template('5-number.html', number=n)
+def template_flask(n):
+    """ returns html template with a number """
+    if type(n) == int:
+        return render_template('5-number.html', n=n)
+
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0')

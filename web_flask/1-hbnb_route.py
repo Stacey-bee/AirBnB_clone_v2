@@ -1,7 +1,6 @@
 #!/usr/bin/python3
-''' flask web application for task 1
-    0x04. AirBnB clone - Web framework
-'''
+""" Starts a flask web application """
+
 
 from flask import Flask
 
@@ -10,15 +9,16 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello():
-    '''returns a hello message'''
+def hello_hbtn():
+    """ returns a hello string to holberton """
     return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    '''returns a hello message'''
+def hello_holberton():
+    """ returns holberton """
     return 'HBNB'
 
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host='0.0.0.0')
