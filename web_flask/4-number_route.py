@@ -1,43 +1,46 @@
 #!/usr/bin/python3
-''' flask web application for task 3
-    0x04. AirBnB clone - Web framework
-'''
 
-from flask import Flask, escape
+"""
+    A Flask web applications tha listens on
+    0.0.0.0 port 5000 and returns messages on
+    different routes
+"""
 
+from flask import Flask
 
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello():
-    '''returns a hello message'''
-    return 'Hello HBNB!'
+def hello_index():
+    """ triggered function from the / route """
+    return "Hello HBNB!"
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    '''returns a hello message'''
-    return 'HBNB'
+def hello_hbnb():
+    """ triggered function from the /hbnb route """
+    return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def ctext(text):
-    '''returns a test message'''
-    return 'C {}'.format(escape(text).replace('_', ' '))
+def ciswhat(text):
+    """ returns C + <user text> for the specified route """
+    return "C " + text.replace("_", " ")
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def pythontext(text='is cool'):
-    '''returns a test message'''
-    return 'Python {}'.format(escape(text).replace('_', ' '))
+def pythoniswhat(text="is cool"):
+    """ returns Python + <user text> for the specified route """
+    return "Python " + text.replace("_", " ")
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
-def numberRoute(n):
-    '''returns a test message'''
-    return '{} is a number'.format(n)
+def display_number(n):
+    """ displays n if it's only an integer """
+    return "{} is a number".format(n)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
