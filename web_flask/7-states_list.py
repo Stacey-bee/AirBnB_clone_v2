@@ -4,6 +4,8 @@
 '''
 
 from flask import Flask, escape, render_template
+from models import storage
+from models.state import State
 
 
 app = Flask(__name__)
@@ -44,6 +46,25 @@ def numberRoute(n):
 def templateRoute(n):
     '''returns a test template'''
     return render_template('5-number.html', number=n)
+
+
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
+def template_odd_even_Route(n):
+    '''returns a test template'''
+    return render_template('6-number_odd_or_even.html', number=n)
+
+
+@app.route('/states_list', strict_slashes=False)
+def states_list():
+    '''lists available states'''
+    states = storage.all(State).values()
+    return render_template('7-states_list.html', states=states)
+
+
+@app.teardown_appcontext
+def teardown_app(exception):
+    '''teardown the app , closes current sqlalchemy session'''
+    storage.close()
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)

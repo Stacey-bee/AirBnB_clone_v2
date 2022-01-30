@@ -1,33 +1,30 @@
 #!/usr/bin/python3
+''' flask web application for task 2
+    0x04. AirBnB clone - Web framework
+'''
 
-"""
-    A Flask web applications tha listens on
-    0.0.0.0 port 5000 and returns messages on
-    different routes
-"""
+from flask import Flask, escape
 
-from flask import Flask
 
 app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_index():
-    """ triggered function from the / route """
-    return "Hello HBNB!"
+def hello():
+    '''returns a hello message'''
+    return 'Hello HBNB!'
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hello_hbnb():
-    """ triggered function from the /hbnb route """
-    return "HBNB"
+def hbnb():
+    '''returns a hello message'''
+    return 'HBNB'
 
 
 @app.route('/c/<text>', strict_slashes=False)
-def ciswhat(text):
-    """ returns C + <user text> for the specified route """
-    return "C " + text.replace("_", " ")
+def ctext(text):
+    '''returns a test message'''
+    return 'C {}'.format(escape(text).replace('_', ' '))
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host="0.0.0.0", port=5000)
